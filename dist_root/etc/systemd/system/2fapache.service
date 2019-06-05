@@ -1,0 +1,15 @@
+[Unit]
+Description=FAUST CTF 2fapache service
+Wants=2fapache-keygen.service
+After=2fapache-keygen.service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Environment=HOST_HOSTNAME=%m
+WorkingDirectory=/srv/two-factor-apache
+ExecStart=/usr/bin/docker-compose run --rm 2fapache
+User=root
+
+[Install]
+WantedBy=multi-user.target

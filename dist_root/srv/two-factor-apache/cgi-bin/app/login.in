@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Signin</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="/static/css/signin.css" rel="stylesheet">
+    <script src="/static/js/signin.js" defer></script>
+  </head>
+  <body class="text-center">
+    <noscript>
+        <div class="alert alert-danger" role="alert">
+          JavaScript required - sorry, I didn't find a way to avoid that.
+        </div>
+    </noscript>
+
+    <form class="form-signin" method="POST" action="do-login">
+      <input type="hidden" name="csrf" value="{csrf_token}">
+      <input type="hidden" name="httpd_location" value="{httpd_location}">
+
+      <img class="mb-4" src="/static/assets/brand/2f.png" alt="">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+      <label for="user" class="sr-only">User name</label>
+      <input type="text" id="user" name="user" class="form-control" placeholder="User name" required autofocus value="{user}">
+
+      <label for="pass" class="sr-only">Password</label>
+      <input type="password" name="pass" id="pass" class="form-control" placeholder="Password" required>
+
+      <label for="otp" class="sr-only">1-Time token</label>
+      <input type="text" id="otp" name="otp" class="form-control" placeholder="1-Time token" required autocomplete="off">
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+      <small><a href="/cgi-bin/sign-up">New? Sign Up</a></small>
+    </form>
+  </body>
+</html>

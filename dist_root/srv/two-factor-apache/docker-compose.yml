@@ -1,0 +1,23 @@
+version: '2.2'
+services:
+  2fapache:
+    hostname: "2fapache.${HOST_HOSTNAME}"
+    build: .
+    init: true
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+    volumes:
+     - ./htdocs:/usr/local/apache2/htdocs/:ro
+     - ./data/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+     - ./cgi-bin:/usr/local/apache2/cgi-bin/:ro
+     - ./data/pam-2fapache:/etc/pam.d/2fapache:ro
+     - ./spawn_apache_fcgi:/usr/local/sbin/spawn_apache_fcgi:ro
+     - ./data/cookie_key:/usr/local/apache2/conf/cookie_key:ro
+     - ./data/home:/home:rw
+     - ./data/liboath:/etc/liboath:rw
+     - ./sock_dir:/usr/local/apache2/sock_dir:rw
+     - ./listen_unix.so:/usr/local/apache2/lib/listen_unix.so:ro
+     - etc:/etc
+    network_mode: "none"
+volumes:
+  etc: {}

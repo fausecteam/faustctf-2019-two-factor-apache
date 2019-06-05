@@ -1,0 +1,6 @@
+[Unit]
+Description=FAUST CTF 2fapache key generator
+ConditionFileNotEmpty=|!/srv/two-factor-apache/data/cookie_key
+
+[Service]
+ExecStart=/usr/bin/xxd -c 128 -p -l 128 /dev/urandom /srv/two-factor-apache/data/cookie_key

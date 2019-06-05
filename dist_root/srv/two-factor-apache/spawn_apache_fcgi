@@ -1,0 +1,22 @@
+#!/bin/bash
+set -x
+set -e
+
+export LC_ALL=C.UTF-8
+
+env LD_PRELOAD=$(pwd)/lib/listen_unix.so \
+    /usr/local/apache2/bin/httpd -DNO_DETACH &
+apache_pid=$!
+
+env PYTHONPATH=cgi-bin python3 -m app.handler &
+fcgi_pid=$!
+
+terminate() {
+    kill -TERM $apache_pid $fcgi_pid
+    sleep 1
+}
+trap terminate SIGTERM
+
+
+# exit with first of httpd and fcgi-handler
+wait -n

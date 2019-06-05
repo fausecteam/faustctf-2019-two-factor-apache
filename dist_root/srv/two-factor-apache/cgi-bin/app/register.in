@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Register</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="/static/css/signin.css" rel="stylesheet">
+    <script src="/static/js/signin.js" defer></script>
+  </head>
+  <body class="text-center">
+    <form class="form-signin" method="POST" action="do-register">
+      <input type="hidden" name="csrf" value="{csrf_token}">
+
+      <img class="mb-4" src="/static/assets/brand/2f.png" alt="">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+
+      <label for="user" class="sr-only">User name</label>
+      <input type="text" id="user" name="user" class="form-control" placeholder="User name" required autofocus value="{user}">
+
+      <label for="pass" class="sr-only">Password</label>
+      <input type="password" name="pass" id="pass" class="form-control" placeholder="Password" required>
+
+      <label for="pass2" class="sr-only">Password confirmation</label>
+      <input type="password" id="pass2" name="pass2" class="form-control" placeholder="Password confirmation" required>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    </form>
+  </body>
+</html>

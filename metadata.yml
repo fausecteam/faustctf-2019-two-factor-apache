@@ -1,0 +1,42 @@
+# Human-readable name of the service
+name: 2fapache
+# Name of the service for usage in paths, usernames etc.: Should only consist of lowercase alphanumeric
+# characters
+slug: two-factor-apache
+authors:
+  - Malte Kraus <faust@maltekraus.de>
+
+install:
+  debian_packages: []
+  #  - docker.io
+  #  - docker-compose
+  # These will be run on the Vulnbox after extracting "dist_root" (from the build) to the root file system,
+  # installing Debian packages and creating the service user
+  postinst_commands:
+    - echo "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable" > /etc/apt/sources.list.d/docker.list
+    - apt-key add /srv/two-factor-apache/docker-deb.asc
+    - rm /srv/two-factor-apache/docker-deb.asc
+    - apt-get update
+    - apt-get -y install docker-ce docker-ce-cli python3-docker/stretch-backports python3-texttable/stretch-backports docker-compose/stretch-backports
+    - systemctl enable 2fapache.service
+    - bash -c 'chgrp 100000 /srv/two-factor-apache/{,spawn_apache_fcgi,listen_unix.so}'
+    - bash -c 'chmod o= /srv/two-factor-apache/{spawn_apache_fcgi,listen_unix.so}'
+    - bash -c 'chmod o= /srv/two-factor-apache/{docker-compose.yml,Dockerfile}'
+    - chown -R 100000:100000 /srv/two-factor-apache/data
+    - chmod 0700 /srv/two-factor-apache/data/liboath
+    - chmod 0751 /srv/two-factor-apache
+    - chown 100000:www-data /srv/two-factor-apache/sock_dir
+    - chmod 2710 /srv/two-factor-apache/sock_dir # need setgid to allow access from host nginx
+  # This doesn't work for us, due to the use of user namespaces, but docker's network=none should be equivalent.
+  prevent_outgoing_connections: False
+
+checker:
+  module: two_factor_apache
+  class: TwoFactorApacheChecker
+  debian_packages:
+      - python3-requests
+      - python3-dev
+      - build-essential
+  pip_packages:
+      - 'zbar-py==1.0.4'
+      - 'oath==1.4.2'

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Index Of {path}</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="/static/css/dir-index.css" rel="stylesheet" crossorigin="anonymous">
+  </head>
+  <body class="text-center">
+    <h1>Index Of {path}</h1>
+
+
+    <div class="list-group" id="dir-index">

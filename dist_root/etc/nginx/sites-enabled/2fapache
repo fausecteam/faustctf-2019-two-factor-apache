@@ -1,0 +1,8 @@
+server {
+        listen 1234;
+
+        location / {
+                proxy_pass http://unix://srv/two-factor-apache/sock_dir/listen.sock:/;
+                proxy_redirect http://localhost/ /;
+        }
+}

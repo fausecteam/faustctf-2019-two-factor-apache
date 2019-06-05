@@ -1,0 +1,7 @@
+div pre {
+    line-height: 1;
+    background-color: black;
+    color: white;
+    overflow: visible;
+    display: inline-block;
+}
